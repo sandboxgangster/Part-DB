@@ -23,9 +23,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 
-//CHANGE ME: Move to real include dir
-//include("smarty/Smarty.class.php");
-
     /**
      * @file class.HTML.php
      * @brief class HTML
