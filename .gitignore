@@ -48,6 +48,7 @@ Desktop.ini
 
 # NetBeans
 nbproject/private/
+nbproject/
 build/
 nbbuild/
 dist/
@@ -55,3 +56,25 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+
+# Web workbench (sass)
+.sass-cache/
+
+# PHPStorm
+.idea/
