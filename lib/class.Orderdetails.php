@@ -138,6 +138,14 @@
             }
         }
 
+        public function get_json_array()
+        {
+            $ret = array('id' => $this->get_id()
+                );
+
+            return $ret;
+        }
+
         /********************************************************************************
         *
         *   Getters
