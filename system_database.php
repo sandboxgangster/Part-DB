@@ -83,7 +83,7 @@
                     break;
 
                 if ( ! is_admin_password($admin_password))
-                    throw new Exception('Das Administratorpasswort ist falsch!');
+                    throw new Exception(_('Das Administratorpasswort ist falsch!'));
 
                 $config['db']['type'] = $db_type;
                 //$config['db']['charset'] = $db_charset; // temporarly deactivated
@@ -97,8 +97,8 @@
             catch (Exception $e)
             {
                 $config = $config_old; // reload the old config
-                $messages[] = array('text' => 'Die neuen Werte konnten nicht gespeichert werden!', 'strong' => true, 'color' => 'red');
-                $messages[] = array('text' => 'Fehlermeldung: '.nl2br($e->getMessage()), 'color' => 'red');
+                $messages[] = array('text' => _('Die neuen Werte konnten nicht gespeichert werden!'), 'strong' => true, 'color' => 'red');
+                $messages[] = array('text' => _('Fehlermeldung: ').nl2br($e->getMessage()), 'color' => 'red');
             }
             break;
 
@@ -113,8 +113,8 @@
             catch (Exception $e)
             {
                 $config = $config_old; // reload the old config
-                $messages[] = array('text' => 'Die neuen Werte konnten nicht gespeichert werden!', 'strong' => true, 'color' => 'red');
-                $messages[] = array('text' => 'Fehlermeldung: '.nl2br($e->getMessage()), 'color' => 'red');
+                $messages[] = array('text' => _('Die neuen Werte konnten nicht gespeichert werden!'), 'strong' => true, 'color' => 'red');
+                $messages[] = array('text' => _('Fehlermeldung: ').nl2br($e->getMessage()), 'color' => 'red');
             }
             break;
 
@@ -126,7 +126,7 @@
             try
             {
                 if ( ! is_object($database))
-                    throw new Exception('Es konnte keine Verbindung mit der Datenbank hergestellt werden!');
+                    throw new Exception(_('Es konnte keine Verbindung mit der Datenbank hergestellt werden!'));
 
                 $database_update_executed = true;
                 $update_log = $database->update();
@@ -136,8 +136,8 @@
             }
             catch (Exception $e)
             {
-                $messages[] = array('text' => 'Es trat ein Fehler auf!', 'strong' => true, 'color' => 'red');
-                $messages[] = array('text' => 'Fehlermeldung: '.nl2br($e->getMessage()), 'color' => 'red');
+                $messages[] = array('text' => _('Es trat ein Fehler auf!'), 'strong' => true, 'color' => 'red');
+                $messages[] = array('text' => _('Fehlermeldung: ').nl2br($e->getMessage()), 'color' => 'red');
             }
             $messages[count($messages)-1]['text'] .= nl2br("\n");
             break;
@@ -171,20 +171,20 @@
 
             if (($current > 0) && ($current < 13) && ($latest >= 13)) // v12 to v13 was a huge update! show warning!
             {
-                $messages[] = array('text' =>   'Achtung!<br><br>'.
+                $messages[] = array('text' =>   _('Achtung!<br><br>'.
                                                 'Das Datenbankupdate auf Version 13 ist sehr umfangreich, es finden sehr viele Veränderungen statt.<br>'.
                                                 'Es wird dringend empfohlen, vor dem Update eine Sicherung der Datenbank anzulegen, '.
                                                 'damit diese im Fehlerfall wiederhergestellt, und so ein Datenverlust verhindert werden kann.<br>'.
                                                 'Die Entwickler von Part-DB übernehmen keinerlei Haftung für Schäden, die durch fehlgeschlagene Updates, '.
-                                                'Fehler in der Software oder durch andere Ursachen hervorgerufen werden.',
+                                                'Fehler in der Software oder durch andere Ursachen hervorgerufen werden.'),
                                                 'strong' => true, 'color' => 'red', );
             }
             elseif (($current > 0) && ($latest > $current)) // normal update...we will show a hint
             {
-                $messages[] = array('text' =>   'Hinweis:<br><br>'.
+                $messages[] = array('text' =>   _('Hinweis:<br><br>'.
                                                 'Es wird dringend empfohlen, vor jedem Datenbankupdate eine Sicherung der Datenbank anzulegen.<br>'.
                                                 'Die Entwickler von Part-DB übernehmen keinerlei Haftung für Schäden, die durch fehlgeschlagene Updates, '.
-                                                'Fehler in der Software oder durch andere Ursachen hervorgerufen werden.',
+                                                'Fehler in der Software oder durch andere Ursachen hervorgerufen werden.'),
                                                 'strong' => true, 'color' => 'red', );
             }
         }

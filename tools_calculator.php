@@ -34,7 +34,7 @@
     *
     *********************************************************************************/ 
 
-    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], 'Widerstandsrechner');
+    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], _('Widerstandsrechner'));
 
     /********************************************************************************
     *

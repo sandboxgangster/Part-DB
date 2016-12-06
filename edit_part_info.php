@@ -120,7 +120,7 @@
     *
     *********************************************************************************/
 
-    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], 'Bauteil bearbeiten');
+    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], _('Bauteil bearbeiten'));
 
     try
     {
@@ -231,7 +231,7 @@
                 try
                 {
                     if ( ! is_object($orderdetails))
-                        throw new Exception('Es ist keine Einkaufsinformation ausgewählt!');
+                        throw new Exception(_('Es ist keine Einkaufsinformation ausgewählt!'));
 
                     $orderdetails->set_attributes(array(    'id_supplier'               => $new_supplier_id,
                                                             'supplierpartnr'            => $new_supplierpartnr,
@@ -247,7 +247,7 @@
                 try
                 {
                     if ( ! is_object($orderdetails))
-                        throw new Exception('Es ist keine Einkaufsinformation ausgewählt!');
+                        throw new Exception(_('Es ist keine Einkaufsinformation ausgewählt!'));
 
                     $orderdetails->delete();
                 }
@@ -274,7 +274,7 @@
                 try
                 {
                     if ( ! is_object($pricedetails))
-                        throw new Exception('Es ist keine Preisinformation ausgewählt!');
+                        throw new Exception(_('Es ist keine Preisinformation ausgewählt!'));
 
                     $pricedetails->set_attributes(array(    'price'                     => $new_price,
                                                             'price_related_quantity'    => $new_price_related_quantity,
@@ -290,7 +290,7 @@
                 try
                 {
                     if ( ! is_object($pricedetails))
-                        throw new Exception('Es ist keine Preisinformation ausgewählt!');
+                        throw new Exception(_('Es ist keine Preisinformation ausgewählt!'));
 
                     $pricedetails->delete();
                 }
@@ -304,7 +304,7 @@
                 try
                 {
                     if ((strlen($_FILES['attachement_file']['name']) == 0) == (strlen($new_filename) == 0))
-                        throw new Exception('Sie müssen entweder ein Dateiname angeben, oder eine Datei zum Hochladen wählen!');
+                        throw new Exception(_('Sie müssen entweder ein Dateiname angeben, oder eine Datei zum Hochladen wählen!'));
 
                     if (strlen($_FILES['attachement_file']['name']) > 0)
                         $new_filename = upload_file($_FILES['attachement_file'], BASE.'/data/media/');
@@ -325,7 +325,7 @@
                 try
                 {
                     if ( ! is_object($attachement))
-                        throw new Exception('Es ist kein Dateianhang ausgewählt!');
+                        throw new Exception(_('Es ist kein Dateianhang ausgewählt!'));
 
                     if (strlen($_FILES['attachement_file']['name']) > 0)
                         $new_filename = upload_file($_FILES['attachement_file'], BASE.'/data/media/');
@@ -357,7 +357,7 @@
                 try
                 {
                     if ( ! is_object($attachement))
-                        throw new Exception('Es ist kein Dateianhang ausgewählt!');
+                        throw new Exception(_('Es ist kein Dateianhang ausgewählt!'));
 
                     // if this is the master picture, we have to remove that attribute
                     $master_picture = $part->get_master_picture_attachement();
@@ -382,24 +382,24 @@
                         $device_names = '';
                         foreach ($devices as $device)
                             $device_names .= "\n&nbsp;&nbsp;&bull; ".$device->get_full_path();
-                        throw new Exception('Das Bauteil kann nicht gelöscht werden, da es noch in den '.
-                                            'folgenden Baugruppen verwendet wird:'.$device_names);
+                        throw new Exception(_('Das Bauteil kann nicht gelöscht werden, da es noch in den '.
+                                            'folgenden Baugruppen verwendet wird:').$device_names);
                     }
 
-                    $messages[] = array('text' => 'Soll das Bauteil "'.$part->get_name().'" wirklich unwiederruflich gelöscht werden?',
+                    $messages[] = array('text' => sprintf(_('Soll das Bauteil "%s" wirklich unwiederruflich gelöscht werden?'), $part->get_name()),
                                             'strong' => true, 'color' => 'red');
-                    $messages[] = array('text' => '<br>Hinweise:', 'strong' => true);
-                    $messages[] = array('text' => '&nbsp;&nbsp;&bull; Es gibt keine Baugruppen die dieses Bauteil verwenden.');
+                    $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
+                    $messages[] = array('text' => _('&nbsp;&nbsp;&bull; Es gibt keine Baugruppen die dieses Bauteil verwenden.'));
                     if ($delete_files_from_hdd)
-                        $messages[] = array('text' => '&nbsp;&nbsp;&bull; Alle Dateien dieses Bauteiles, die nicht von anderen Bauteilen verwendet werden, werden von der Festplatte gelöscht!', 'color' => 'red');
+                        $messages[] = array('text' => _('&nbsp;&nbsp;&bull; Alle Dateien dieses Bauteiles, die nicht von anderen Bauteilen verwendet werden, werden von der Festplatte gelöscht!'), 'color' => 'red');
                     else
-                        $messages[] = array('text' => '&nbsp;&nbsp;&bull; Alle Dateien dieses Bauteiles bleiben weiterhin erhalten.');
+                        $messages[] = array('text' => _('&nbsp;&nbsp;&bull; Alle Dateien dieses Bauteiles bleiben weiterhin erhalten.'));
 
                     $messages[] = array('html' => '<input type="hidden" name="pid" value="'.$part_id.'">');
                     if ($delete_files_from_hdd)
                         $messages[] = array('html' => '<input type="hidden" name="delete_files_from_hdd">');
-                    $messages[] = array('html' => '<input type="submit" value="Nein, nicht löschen">', 'no_linebreak' => true);
-                    $messages[] = array('html' => '<input type="submit" name="delete_part_confirmed" value="Ja, Bauteil löschen">');
+                    $messages[] = array('html' => '<input class="btn btn-default" type="submit" value="'._('Nein, nicht löschen').'">', 'no_linebreak' => true);
+                    $messages[] = array('html' => '<input class="btn btn-danger" type="submit" name="delete_part_confirmed" value="'._('Ja, Bauteil löschen').'">');
                 }
                 catch (Exception $e)
                 {
@@ -412,8 +412,8 @@
                 {
                     $part->delete($delete_files_from_hdd);
                     $part = NULL;
-                    $messages[] = array('text' => 'Das Bauteil wurde erfolgreich gelöscht!', 'strong' => true, 'color' => 'darkgreen');
-                    $messages[] = array('html' => '<br><input type="button" value="Fenster schliessen" onClick="window.close()">');
+                    $messages[] = array('text' => _('Das Bauteil wurde erfolgreich gelöscht!'), 'strong' => true, 'color' => 'darkgreen');
+                    $messages[] = array('html' => '<br><input type="button" value="'._('Fenster schliessen').'" onClick="window.close()">');
                     $fatal_error = true; // there is no error, but we cannot display the part infos because the part exists no longer :-)
                 }
                 catch (Exception $e)

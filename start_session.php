@@ -278,7 +278,10 @@
 
     own_setlocale(LC_ALL, $config['language']);
 
-    //$_SESSION["lang"] = $lang;
+    //Set gettext locale for PHP
+    $domain = "php";
+    bindtextdomain($domain, BASE . '/locale');
+    textdomain($domain);
 
 
 

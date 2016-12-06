@@ -121,8 +121,8 @@
                 debug('error', 'Konnte nicht mit Datenbank verbinden: '.$e->getMessage(),
                         __FILE__, __LINE__, __METHOD__);
 
-                throw new Exception("Es konnte nicht mit der Datenbank verbunden werden! \n".
-                                    'Überprüfen Sie, ob die Zugangsdaten korrekt sind.');
+                throw new Exception(_("Es konnte nicht mit der Datenbank verbunden werden! \n".
+                                      'Überprüfen Sie, ob die Zugangsdaten korrekt sind.'));
             }
 
             // make some checks
@@ -139,7 +139,7 @@
                 }
 
                 if (count($wrong_engine_tables) > 0)
-                    throw new Exception("Die folgenden MySQL Tabellen haben eine falsche Speicherengine (benötigt wird \"InnoDB\"): \n".
+                    throw new Exception(_("Die folgenden MySQL Tabellen haben eine falsche Speicherengine (benötigt wird \"InnoDB\"): \n").
                                         implode(', ', $wrong_engine_tables));
             }
         }
@@ -181,7 +181,7 @@
         public function get_latest_version()
         {
             if ( ! defined('LATEST_DB_VERSION'))
-                throw new Exception('Konstante "LATEST_DB_VERSION" ist nicht definiert!');
+                throw new Exception(_('Konstante "LATEST_DB_VERSION" ist nicht definiert!'));
 
             return LATEST_DB_VERSION; // this constant is defined in "db_update_steps.php"
         }
@@ -300,7 +300,7 @@
             $latest = $this->get_latest_version();
 
             if ($this->transaction_active)
-                throw new Exception('Ein Datenbankupdate kann nicht mitten in einer offenen Transaktion durchgeführt werden!');
+                throw new Exception(_('Ein Datenbankupdate kann nicht mitten in einer offenen Transaktion durchgeführt werden!'));
 
             // Later in the updateprocess, we will store the position of the update step in the config.php if an error occurs,
             // so the next attempt can start at the same position. But if the user has no write access to the config.php,
@@ -321,8 +321,8 @@
                 }
                 catch (Exception $exception)
                 {
-                    $add_log('FEHLER: Wird zur Zeit schon ein Update durchgeführt?', true);
-                    $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                    $add_log(_('FEHLER: Wird zur Zeit schon ein Update durchgeführt?'), true);
+                    $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                     $error = true;
                 }
             }
@@ -330,7 +330,7 @@
             // change SQL mode
             try
             {
-                $add_log('SQL_MODE wird gesetzt...');
+                $add_log(_('SQL_MODE wird gesetzt...'));
                 $this->execute("SET SQL_MODE=''");
             }
             catch (Exception $exception)
@@ -349,7 +349,7 @@
 
                 if (count($steps) == 0)
                 {
-                    $add_log('FEHLER: Keine Updateschritte für Version '.$current.' gefunden!', true);
+                    $add_log(sprintf(_('FEHLER: Keine Updateschritte für Version %s gefunden!'),$current), true);
                     $error = true;
                     break;
                 }
@@ -371,15 +371,15 @@
                         $this->pdo->beginTransaction();
                         $this->pdo->exec($query);
                         $this->pdo->commit();
-                        $add_log('Schritt: '.$query.'...OK');
+                        $add_log(sprintf(_('Schritt: %s ...OK'), $query));
                     }
                     catch (PDOException $e)
                     {
                         try {$this->pdo->rollback();} catch (PDOException $e2) {} // rollback last query, ignore exceptions
                         debug('error', '$query="'.$query.'"', __FILE__, __LINE__, __METHOD__);
-                        debug('error', 'Fehlermeldung: "'.$e->getMessage().'"', __FILE__, __LINE__, __METHOD__);
-                        $add_log('Schritt: '.$query.'...FEHLER!', true);
-                        $add_log('Fehlermeldung: '.$e->getMessage(), true);
+                        debug('error', _('Fehlermeldung: "').$e->getMessage().'"', __FILE__, __LINE__, __METHOD__);
+                        $add_log(sprintf(_('Schritt: %s ...FEHLER!'),$query), true);
+                        $add_log(_('Fehlermeldung: ').$e->getMessage(), true);
                         $error = true;
                         break;
                     }
@@ -399,8 +399,8 @@
                     }
                     catch (Exception $exception)
                     {
-                        $add_log('FEHLER: Die neue Version konnte nicht gesetzt werden!', true);
-                        $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                        $add_log(_('FEHLER: Die neue Version konnte nicht gesetzt werden!'), true);
+                        $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                         $error = true;
                         break;
                     }
@@ -424,8 +424,8 @@
                 }
                 catch (Exception $exception)
                 {
-                    $add_log('FEHLER: Die aktuelle Update-Position konnte nicht in der config.php gespeichert werden!', true);
-                    $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                    $add_log(_('FEHLER: Die aktuelle Update-Position konnte nicht in der config.php gespeichert werden!'), true);
+                    $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                     $error = true;
                     break;
                 }
@@ -438,8 +438,8 @@
                     }
                     catch (Exception $exception)
                     {
-                        $add_log('FEHLER: Die aktuelle Version konnte nicht gelesen werden!', true);
-                        $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                        $add_log(_('FEHLER: Die aktuelle Version konnte nicht gelesen werden!'), true);
+                        $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                         $error = true;
                         break;
                     }
@@ -447,7 +447,7 @@
 
                 if (($current <= 1) && ( ! $error))
                 {
-                    $add_log('FEHLER: Die neue Version konnte nicht gesetzt werden!', true);
+                    $add_log(_('FEHLER: Die neue Version konnte nicht gesetzt werden!'), true);
                     $error = true;
                     break;
                 }
@@ -458,13 +458,13 @@
             // change SQL mode
             try
             {
-                $add_log('SQL_MODE wird gesetzt...');
+                $add_log(_('SQL_MODE wird gesetzt...'));
                 $this->execute("SET SQL_MODE='".$this->sql_mode."'");
             }
             catch (Exception $exception)
             {
-                $add_log('FEHLER!', true);
-                $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                $add_log(_('FEHLER!'), true);
+                $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                 $error = true;
             }
 
@@ -473,28 +473,28 @@
             {
                 try
                 {
-                    $add_log('Datenbank wird freigegeben...');
+                    $add_log(_('Datenbank wird freigegeben...'));
                     $query_data = $this->query("SELECT RELEASE_LOCK('UpdatePartDB')");
                 }
                 catch (Exception $exception)
                 {
-                    $add_log('FEHLER: Die Datenbank konnte nicht entsperrt werden!', true);
-                    $add_log('Fehlermeldung: '.$exception->getMessage(), true);
+                    $add_log(_('FEHLER: Die Datenbank konnte nicht entsperrt werden!'), true);
+                    $add_log(_('Fehlermeldung: ').$exception->getMessage(), true);
                     $error = true;
                 }
             }
 
             if ($error)
             {
-                debug('error', 'ABBRUCH: Das Update konnte nicht durchgeführt werden!');
-                debug('error', 'Zweitletzte Zeile: '.$log[count($log)-2]['text']);
-                debug('error', 'Letzte Zeile: '.$log[count($log)-1]['text']);
-                $add_log('ABBRUCH: Das Update konnte nicht durchgeführt werden!', true);
+                debug('error', _('ABBRUCH: Das Update konnte nicht durchgeführt werden!'));
+                debug('error', _('Zweitletzte Zeile: ').$log[count($log)-2]['text']);
+                debug('error', _('Letzte Zeile: ').$log[count($log)-1]['text']);
+                $add_log(_('ABBRUCH: Das Update konnte nicht durchgeführt werden!'), true);
             }
             else
             {
-                debug('success', 'Das Update wurde erfolgreich durchgeführt.');
-                $add_log('Das Update wurde erfolgreich durchgeführt.');
+                debug('success', _('Das Update wurde erfolgreich durchgeführt.'));
+                $add_log(_('Das Update wurde erfolgreich durchgeführt.'));
             }
 
             return $log;
@@ -558,7 +558,7 @@
                 }
                 catch (PDOException $e)
                 {
-                    throw new Exception('PDO::begin_transaction() lieferte einen Fehler: '.$e->getMessage());
+                    throw new Exception(_('PDO::begin_transaction() lieferte einen Fehler: ').$e->getMessage());
                 }
             }
 
@@ -578,13 +578,13 @@
         public function commit($transaction_id)
         {
             if ( ! $this->transaction_active)
-                throw new Exception('Es wurde noch keine Transaktion gestartet!');
+                throw new Exception(_('Es wurde noch keine Transaktion gestartet!'));
 
             if ($transaction_id == 0)
                 return;
 
             if ($transaction_id != $this->active_transaction_id)
-                throw new Exception('Die übermittelte Transaktions-ID ist nicht korrekt!');
+                throw new Exception(_('Die übermittelte Transaktions-ID ist nicht korrekt!'));
 
             // all OK, we commit the transaction
             try
@@ -603,7 +603,7 @@
                 {
                 }
 
-                throw new Exception('PDO::commit() lieferte einen Fehler: '.$e->getMessage());
+                throw new Exception(_('PDO::commit() lieferte einen Fehler: ').$e->getMessage());
             }
         }
 
@@ -662,7 +662,7 @@
         public function execute($query, $values = array())
         {
             if (! is_array($values))
-                throw new Exception('$values ist kein Array!');
+                throw new Exception(_('$values ist kein Array!'));
 
             if (stripos($query, 'INSERT') === 0)
                 $is_insert_statement = true;
@@ -676,7 +676,7 @@
                 if ( ! $pdo_statement)
                 {
                     debug('error', 'PDO Prepare Fehler!', __FILE__, __LINE__, __METHOD__);
-                    throw new Exception('PDO prepare Fehler!');
+                    throw new Exception(_('PDO prepare Fehler!'));
                 }
 
                 // bind all values
@@ -687,7 +687,7 @@
                     {
                         debug('error', 'PDO bindValue Fehler: $index="'.$index.'", $value="'.$value.'"',
                                 __FILE__, __LINE__, __METHOD__);
-                        throw new Exception('PDO: Wert konnte nicht gebunden werden!');
+                        throw new Exception(_('PDO: Wert konnte nicht gebunden werden!'));
                     }
                     $index++;
                 }
@@ -695,7 +695,7 @@
                 if ( ! $pdo_statement->execute())
                 {
                     debug('error', 'PDO Execute Fehler!', __FILE__, __LINE__, __METHOD__);
-                    throw new Exception('PDO execute lieferte einen Fehler!');
+                    throw new Exception(_('PDO execute lieferte einen Fehler!'));
                 }
 
                 if ($is_insert_statement == true)
@@ -708,7 +708,7 @@
                 debug('error', '$query="'.$query.'"', __FILE__, __LINE__, __METHOD__);
                 debug('error', '$values="'.print_r($values, true).'"', __FILE__, __LINE__, __METHOD__);
                 debug('error', 'Fehlermeldung: "'.$e->getMessage().'"', __FILE__, __LINE__, __METHOD__);
-                throw new Exception("Datenbankfehler: \n".$e->getMessage()."\n\n SQL-Query:\n ".$query);
+                throw new Exception(_("Datenbankfehler: \n").$e->getMessage()._("\n\n SQL-Query:\n ").$query);
             }
 
             return $result;
@@ -740,7 +740,7 @@
         public function query($query, $values = array(), $fetch_style = PDO::FETCH_ASSOC)
         {
             if ( ! is_array($values))
-                throw new Exception('$values ist kein Array!');
+                throw new Exception(_('$values ist kein Array!'));
 
             try
             {
@@ -748,8 +748,8 @@
 
                 if ( ! $pdo_statement)
                 {
-                    debug('error', 'PDO Prepare Fehler!', __FILE__, __LINE__, __METHOD__);
-                    throw new Exception('PDO prepare Fehler!');
+                    debug('error', _('PDO Prepare Fehler!'), __FILE__, __LINE__, __METHOD__);
+                    throw new Exception(_('PDO prepare Fehler!'));
                 }
 
                 // bind values
@@ -760,7 +760,7 @@
                     {
                         debug('error', 'PDO bindValue Fehler: $index="'.$index.'", $value="'.$value.'"',
                                 __FILE__, __LINE__, __METHOD__);
-                        throw new Exception('PDO: Wert konnte nicht gebunden werden!');
+                        throw new Exception(_('PDO: Wert konnte nicht gebunden werden!'));
                     }
                     $index++;
                 }
@@ -768,7 +768,7 @@
                 if ( ! $pdo_statement->execute())
                 {
                     debug('error', 'PDO Execute Fehler!', __FILE__, __LINE__, __METHOD__);
-                    throw new Exception('PDO execute lieferte einen Fehler!');
+                    throw new Exception(_('PDO execute lieferte einen Fehler!'));
                 }
 
                 $data = $pdo_statement->fetchAll($fetch_style);
@@ -898,7 +898,7 @@
             if (( ! is_array($values)) || (count($values) < 1))
             {
                 debug('error', '$values="'.print_r($values, true).'"', __FILE__, __LINE__, __METHOD__);
-                throw new Exception('$values ist kein gültiges Array!');
+                throw new Exception(_('$values ist kein gültiges Array!'));
             }
 
             $query =    'UPDATE '.$tablename.' SET '.
