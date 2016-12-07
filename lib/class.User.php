@@ -158,7 +158,7 @@
             catch (Exception $e)
             {
                 debug('warning', _('Ungültige "group_id": "').$values['group_id'].'"'.
-                        __("\n\nUrsprüngliche Fehlermeldung: ").$e->getMessage(),
+                        _("\n\nUrsprüngliche Fehlermeldung: ").$e->getMessage(),
                         __FILE__, __LINE__, __METHOD__);
                 throw new Exception(_('Die gewählte Gruppe existiert nicht!'));
             }

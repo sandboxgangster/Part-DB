@@ -109,7 +109,7 @@
             {
                 $transaction_id = $this->database->begin_transaction(); // start transaction
 
-                $parts = $this->get_parts();
+                $parts = $this->get_parts('id_category');
 
                 if (count($parts) > 0)
                     throw new Exception('Das Element enthält noch '.count($parts).' Bauteile!');

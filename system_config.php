@@ -251,8 +251,8 @@
 
     // http charset / theme
     $html->set_loop('http_charset_loop',    array_to_template_loop($config['http_charsets'], $config['html']['http_charset']));
-    $html->set_loop('theme_loop',           build_theme_loop(), $config['html']['theme']);
-    $html->set_loop('custom_css_loop',      build_custom_css_loop(), $config['html']['custom_css']);
+    $html->set_loop('theme_loop',           build_theme_loop());
+    $html->set_loop('custom_css_loop',      build_custom_css_loop());
 
     // locale settings
     $html->set_loop('timezone_loop',        array_to_template_loop($config['timezones'], $config['timezone']));

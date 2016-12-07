@@ -55,7 +55,7 @@
                             padding: 11px;
                             font-size: 12px;}
                 .outer h2 { background-color: #BABABA;
-                            margin-top: 0px;
+                            margin-top: 0;
                             margin-bottom: 1px;
                             border-bottom: 2px solid #F76B02;
                             border-left:   1px solid #F76B02;
@@ -131,6 +131,7 @@
                 break;
             case 'POSIX':
                 $base_locales[] = 'C';
+                break;
             default:
                 break;
         }
