@@ -235,5 +235,3 @@
         $html->print_template('startup');
 
     $html->print_footer();
-
-?>

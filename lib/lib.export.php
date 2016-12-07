@@ -324,5 +324,3 @@
         else
             return $output;
     }
-
-?>

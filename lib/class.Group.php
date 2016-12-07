@@ -161,6 +161,4 @@
             return $database->get_count_of_records('groups');
         }
     
-    } 
-    
-?>
+    }

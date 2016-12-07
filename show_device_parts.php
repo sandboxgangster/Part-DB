@@ -427,4 +427,3 @@
     }
 
     $html->print_footer();
-?>

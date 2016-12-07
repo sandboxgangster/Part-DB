@@ -56,5 +56,3 @@
         $html->print_template('calculator');
 
     $html->print_footer();
-
-?>

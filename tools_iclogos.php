@@ -48,6 +48,3 @@
         $html->print_template('iclogos');
 
     $html->print_footer();
-
-?>
-

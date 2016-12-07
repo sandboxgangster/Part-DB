@@ -218,5 +218,3 @@
     }
 
     $html->print_footer($debug_messages);
-
-?>

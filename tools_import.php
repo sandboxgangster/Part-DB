@@ -239,5 +239,3 @@
     }
 
     $html->print_footer();
-
-?>

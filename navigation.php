@@ -152,5 +152,3 @@
     $html->print_template('navigation');
 
     $html->print_footer();
-
-?>

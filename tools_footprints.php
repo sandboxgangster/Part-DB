@@ -158,6 +158,3 @@
         $html->print_template('footprints');
 
     $html->print_footer();
-
-?>
-

@@ -101,4 +101,3 @@
         $html->print_template('show_noprice_parts');
 
     $html->print_footer();
-?>

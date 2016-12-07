@@ -341,4 +341,3 @@
         $html->print_template('show_order_parts');
 
     $html->print_footer();
-?>

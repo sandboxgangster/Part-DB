@@ -303,5 +303,3 @@
         $html->print_template('system_config');
 
     $html->print_footer();
-
-?>

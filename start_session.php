@@ -289,5 +289,3 @@
     include_once(BASE.'/lib/lib.functions.php');
     include_once(BASE.'/lib/lib.debug.php');
     include_once(BASE.'/lib/lib.php');
-
-?>

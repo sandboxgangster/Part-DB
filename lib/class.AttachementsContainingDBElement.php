@@ -215,6 +215,3 @@
                 return $this->attachements;
         }
     }
-
-
-?>

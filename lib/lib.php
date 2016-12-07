@@ -649,5 +649,3 @@
                 return false;
         }
     }
-
-?>

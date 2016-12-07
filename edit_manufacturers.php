@@ -253,5 +253,3 @@
         $html->print_template('edit_manufacturers');
 
     $html->print_footer();
-
-?>

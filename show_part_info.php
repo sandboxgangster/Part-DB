@@ -243,5 +243,3 @@
         $html->print_template('show_part_info');
 
     $html->print_footer();
-
-?>

@@ -671,5 +671,3 @@
     }
 
     $html->print_footer();
-
-?>

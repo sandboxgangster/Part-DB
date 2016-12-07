@@ -48,6 +48,3 @@
         $html->print_template('labels');
 
     $html->print_footer();
-
-?>
-

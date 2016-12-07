@@ -211,5 +211,3 @@
         $html->print_template('system_database');
 
     $html->print_footer();
-
-?>

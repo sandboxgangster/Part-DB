@@ -95,5 +95,3 @@
         $html->print_template('frameset');
 
     $html->print_footer();
-
-?>

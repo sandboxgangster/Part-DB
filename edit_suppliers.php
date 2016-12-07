@@ -253,5 +253,3 @@
         $html->print_template('edit_suppliers');
 
     $html->print_footer();
-
-?>

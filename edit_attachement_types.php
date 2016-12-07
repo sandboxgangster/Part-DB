@@ -236,5 +236,3 @@
         $html->print_template('edit_attachement_types');
 
     $html->print_footer();
-
-?>

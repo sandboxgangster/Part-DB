@@ -237,5 +237,3 @@
         $html->print_template('edit_devices');
 
     $html->print_footer();
-
-?>
