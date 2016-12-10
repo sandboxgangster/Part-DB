@@ -1232,7 +1232,7 @@
             if ( ! isset($config['table'][$table_type]))
             {
                 debug('error', '$table_type = "'.$table_type.'"', __FILE__, __LINE__, __METHOD__);
-                throw new Exception('"$table_type" ist ungültig!');
+                throw new Exception(_('"$table_type" ist ungültig!'));
             }
 
             // table columns
