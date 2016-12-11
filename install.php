@@ -78,7 +78,7 @@
     *
     *********************************************************************************/
 
-    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], 'Part-DB Installation/Update');
+    $html = new HTML($config['html']['theme'], $config['html']['custom_css'], _('Part-DB Installation/Update'));
 
     try
     {
@@ -108,8 +108,8 @@
 
                     // check if the server supports the selected language and print a warning if not
                     if ( ! own_setlocale(LC_ALL, $config['language']))
-                        throw new Exception('Die gewählte Sprache "'.$config['language'].'" wird vom Server nicht unterstützt!'.
-                                            "\nBitte installieren Sie diese Sprache oder wählen Sie eine andere.");
+                        throw new Exception(sprintf(_('Die gewählte Sprache "%s" wird vom Server nicht unterstützt!'.
+                                            "\nBitte installieren Sie diese Sprache oder wählen Sie eine andere."),$config['language']));
 
                     $config['installation_complete']['locales'] = true; // locales successful set
                 }
@@ -241,13 +241,13 @@
     *********************************************************************************/
 
     $reload_link = $fatal_error ? 'install.php' : '';   // an empty string means that the...
-    $html->print_header($messages, $reload_link);       // ...reload-button won't be visible
+    //$html->print_header($messages, $reload_link);       // ...reload-button won't be visible
 
     $html->print_template('header');
 
     if (! $fatal_error)
         $html->print_template($tmpl_site_to_show);
 
-    $html->print_footer();
+    //$html->print_footer();
 
 ?>

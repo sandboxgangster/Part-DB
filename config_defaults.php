@@ -68,7 +68,7 @@
 
     // html/template settings
     $config['html']['http_charset']                         = 'utf-8'; ///< @todo remove this parameter completely, I think we don't need it! temporary hardcoded in start_session.php
-    $config['html']['theme']                                = 'standard';
+    $config['html']['theme']                                = 'nextgen';
     $config['html']['custom_css']                           = '';
 
     // system update settings
@@ -124,7 +124,7 @@
 
     // miscellaneous settings
     $config['timezone']                                     = 'Europe/Berlin';
-    $config['language']                                     = 'de_DE';
+    $config['language']                                     = 'en_US';
     $config['is_online_demo']                               = false; // disables some (safety-)critical features
     $config['developer_mode']                               = false; // enables the "Debug-Tools" menu
     $config['page_title']                                   = 'Part-DB Elektronische Bauteile-Datenbank';
