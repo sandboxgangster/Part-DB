@@ -299,9 +299,8 @@
             $filename = BASE.'/lib/vlib/'.$classname.'.php';
         }
         //Smarty has its own loader, so ignore smarty classes or this will produce many warnings!
-        else if(strpos(strtolower($classname), 'smarty') == false )
-        {
-            $filename = BASE.'/lib/class.'.$classname.'.php';
+        else if(strpos(strtolower($classname), 'smarty') == false ) {
+            $filename = BASE . '/lib/class.' . $classname . '.php';
         }
 
         //Only load file if it really exists
@@ -329,6 +328,9 @@
 
     include_once(BASE.'/lib/smarty/Autoloader.php');
     Smarty_Autoloader::register();
+
+    //Load BBCode Parser
+    include_once(BASE.'/lib/bbcode/Autoloader.php');
 
     spl_autoload_register("load");
 
