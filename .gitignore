@@ -57,3 +57,4 @@ nb-configuration.xml
 
 # Smarty
 templates_c/
+development/templates_c/
