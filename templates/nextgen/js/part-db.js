@@ -87,7 +87,14 @@ function onNodeSelected(event, data) {
     //$('#content').fadeOut("fast");
     //$('#progressbar').show();
 
-    $("#content").load(data.href + " #content-data");
+    //Check if the selected node is pointing on github, so we open the link in a new tab
+    if(data.href.includes("github.com"))
+    {
+        window.open(data.href, '_blank');
+    }
+    else {
+        $("#content").load(data.href + " #content-data");
+    }
     $(this).treeview('toggleNodeExpanded',data.nodeId)
 }
 

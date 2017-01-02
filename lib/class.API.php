@@ -185,7 +185,8 @@ class API
         $tree[] = treeview_node(_("Zeige"),null,$show_nodes);
         if(!$disable_config) $tree[] = treeview_node(_("System"),null,$system_nodes);
         if($developer_mode) $tree[] = treeview_node(_("Entwickler-Werkzeuge"),null,$dev_nodes);
-        $tree[] = treeview_node(_("Hilfe"),BASE_RELATIVE."documentation/dokuwiki/index.php",null);
+        //$tree[] = treeview_node(_("Hilfe"),BASE_RELATIVE."/documentation/dokuwiki/index.php",null,true);
+        $tree[] = treeview_node(_("Hilfe"),"https://github.com/do9jhb/Part-DB/wiki",null,true);
 
         return $tree;
     }

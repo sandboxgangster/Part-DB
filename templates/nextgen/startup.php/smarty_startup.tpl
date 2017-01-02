@@ -5,6 +5,8 @@
         <h3>{t}Version:{/t} {$system_version_full}{if !empty($git_branch)}, Git: {$git_branch}{if isset($git_commit)}/{$git_commit}{/if}{/if}</h3>
         {/if}
         <h4><i>"NextGen"</i></h4>
+        <p></p>
+        <a class="btn btn-primary btn-lg link-anchor" href="https://github.com/do9jhb/Part-DB/wiki">{t}Mehr Infos und Hilfe{/t}</a>
     </div>
     
     {if isset($database_update) && $database_update}
