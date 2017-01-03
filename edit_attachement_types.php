@@ -128,6 +128,7 @@
                     }
                     else
                     {
+                        /*
                         $messages[] = array('text' => 'Soll der Dateityp "'.$selected_attachement_type->get_full_path().
                                                         '" wirklich unwiederruflich gelöscht werden?', 'strong' => true, 'color' => 'red');
                         $messages[] = array('text' => '<br>Hinweise:', 'strong' => true);
@@ -136,6 +137,16 @@
                         $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_attachement_type->get_id().'">');
                         $messages[] = array('html' => '<input class="btn btn-default" type="submit" value="'._("Nein, nicht löschen").'">', 'no_linebreak' => true);
                         $messages[] = array('html' => '<input class="btn btn-danger" type="submit" name="delete_confirmed" value="'._("Ja, Dateityp löschen"). '">');
+                        */
+
+                        $notes[] = _("Es gibt keine Dateianhänge mit diesem Dateityp.");
+                        $notes[] = _("Beinhaltet diese Dateityp noch Unterdateitypen, dann werden diese eine Ebene nach oben verschoben.");
+                        $title = sprintf(_("Soll der Dateityp %s wirklich unwiederruflich gelöscht werden?"), $selected_attachement_type->get_full_path());
+
+                        $dialog = generate_delete_dialog($selected_attachement_type->get_id(), $title, $notes, _("Ja, Dateityp löschen"), _("Nein, nicht löschen"));
+
+                        $messages = array_merge($messages, $dialog);
+
                     }
                 }
                 catch (Exception $e)

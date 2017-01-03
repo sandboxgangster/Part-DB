@@ -148,6 +148,7 @@
                         }
                         else
                         {
+                            /*
                             $messages[] = array('text' => sprintf(_('Soll der Lagerort "%s'.
                                                             '" wirklich unwiederruflich gelöscht werden?'), $selected_storelocation->get_full_path()), 'strong' => true, 'color' => 'red');
                             $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
@@ -156,6 +157,13 @@
                             $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_storelocation->get_id().'">');
                             $messages[] = array('html' => '<input type="submit" class="btn btn-default" name="" value="'._('Nein, nicht löschen').'">', 'no_linebreak' => true);
                             $messages[] = array('html' => '<input type="submit" class="btn btn-danger" name="delete_confirmed" value="'._('Ja, Lagerort löschen').'">');
+                            */
+
+                            $title = sprintf(_('Soll der Lagerort "%s" wirklich unwiederruflich gelöscht werden?'), $selected_storelocation->get_full_path());
+                            $notes[] = "Es gibt keine Bauteile an diesem Lagerort.";
+                            $notes[] = "Beinhaltet dieser Lagerort noch Unterlagerorte, dann werden diese eine Ebene nach oben verschoben.";
+                            $dialog = generate_delete_dialog($selected_storelocation->get_id(), $title, $notes, _('Ja, Lagerort löschen'), _('Nein, nicht löschen'));
+                            $messages = array_merge($messages, $dialog);
                         }
                     }
                     catch (Exception $e)

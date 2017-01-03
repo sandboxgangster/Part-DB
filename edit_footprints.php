@@ -149,6 +149,7 @@
                     }
                     else
                     {
+                        /*
                         $messages[] = array('text' => sprintf(_('Soll der Footprint "%s'.
                                                         '" wirklich unwiederruflich gelöscht werden?'), $selected_footprint->get_full_path()), 'strong' => true, 'color' => 'red');
                         $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
@@ -157,6 +158,13 @@
                         $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_footprint->get_id().'">');
                         $messages[] = array('html' => '<input type="submit" class="btn btn-default" name="" value="'._('Nein, nicht löschen').'">', 'no_linebreak' => true);
                         $messages[] = array('html' => '<input type="submit" class="btn btn-danger" name="delete_confirmed" value="'._('Ja, Footprint löschen').'">');
+                        */
+
+                        $title = sprintf(_('Soll der Footprint "%s" wirklich unwiederruflich gelöscht werden?'), $selected_footprint->get_full_path());
+                        $notes[] = _("Es gibt keine Bauteile mit diesem Footprint.");
+                        $notes[] = _("Beinhaltet dieser Footprint noch Unterfootprints, dann werden diese eine Ebene nach oben verschoben.");
+                        $dialog = generate_delete_dialog($selected_footprint->get_id(), $title, $notes, _('Ja, Footprint löschen'), _('Nein, nicht löschen'));
+                        $messages = array_merge($messages, $dialog);
                     }
                 }
                 catch (Exception $e)

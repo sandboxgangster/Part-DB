@@ -123,6 +123,7 @@
                     $parts = $selected_device->get_parts();
                     $count = count($parts);
 
+                    /*
                     $messages[] = array('text' => sprintf(_('Soll die Baugruppe "%s'.
                                                         '" wirklich unwiederruflich gelöscht werden?'), $selected_device->get_full_path()), 'strong' => true, 'color' => 'red');
                     $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
@@ -134,6 +135,18 @@
                     $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_device->get_id().'">');
                     $messages[] = array('html' => '<input type="submit" class="btn btn-default" name="" value="'._("Nein, nicht löschen").'">', 'no_linebreak' => true);
                     $messages[] = array('html' => '<input type="submit" class="btn btn-danger" name="delete_confirmed" value="'._('Ja, Baugruppe löschen').'">');
+                    */
+                    if ($count > 0)
+                        $notes[] = sprintf(_('Es gibt noch %d Bauteile in dieser Baugruppe!'), $count);
+                    else
+                        $notes[] = _('Es gibt keine Bauteile in dieser Baugruppe.');
+                    $notes[] = _('Beinhaltet diese Baugruppe noch Unterbaugruppen, dann werden diese eine Ebene nach oben verschoben.');
+
+                    $title = sprintf(_('Soll die Baugruppe "%s" wirklich unwiederruflich gelöscht werden?'), $selected_device->get_full_path());
+
+                    $dialog = generate_delete_dialog($selected_device->get_id(), $title, $notes, _('Ja, Baugruppe löschen'), _("Nein, nicht löschen"));
+                    $messages = array_merge($messages, $dialog);
+
                 }
                 catch (Exception $e)
                 {

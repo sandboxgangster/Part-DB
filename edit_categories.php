@@ -135,6 +135,7 @@
                     }
                     else
                     {
+                        /*
                         $messages[] = array('text' => sprintf(_('Soll die Kategorie "%s'.
                                                         '" wirklich unwiederruflich gelöscht werden?'), $selected_category->get_full_path()), 'strong' => true, 'color' => 'red');
                         $messages[] = array('text' => '<br>'._('Hinweise:'), 'strong' => true);
@@ -143,6 +144,16 @@
                         $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_category->get_id().'">');
                         $messages[] = array('html' => '<input class="btn btn-default" type="submit" name="" value="'._('Nein, nicht löschen').'">', 'no_linebreak' => true);
                         $messages[] = array('html' => '<input class="btn btn-danger" type="submit" name="delete_confirmed" value="'._('Ja, Kategorie löschen').'">');
+                        */
+
+                        $notes[] = _('Es gibt keine Bauteile in dieser Kategorie.');
+                        $notes[] = _('Beinhaltet diese Kategorie noch Unterkategorien, dann werden diese eine Ebene nach oben verschoben.');
+                        $title = sprintf(_('Soll die Kategorie "%s'.
+                            '" wirklich unwiederruflich gelöscht werden?'), $selected_category->get_full_path());
+                        $dialog = generate_delete_dialog($selected_category->get_id(), $title, $notes, _('Ja, Kategorie löschen'), _('Nein, nicht löschen'));
+                        $messages = array_merge($messages, $dialog);
+
+
                     }
                 }
                 catch (Exception $e)

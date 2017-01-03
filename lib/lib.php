@@ -163,6 +163,34 @@
     }
 
     /**
+     * Generates an message array with a remove dialog based on the given params
+     * @param int $id The id of the current part
+     * @param string $title The introducional string of the dialog
+     * @param array  $notes An Array containing lines of notes
+     * @param string $confirm_msg The content of the confirmation button.
+     * @param string $abort_msg The content of the abort button.
+     * @retval array A array containing the messages
+    */
+    function generate_delete_dialog($id, $title, $notes, $confirm_msg, $abort_msg)
+    {
+        $messages = array();
+        $messages[] = array('text' =>  $title, 'strong' => true, 'color' => 'red');
+        $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
+        $messages[] = array('html' => "<ul>", 'no_linebreak' => true);
+        foreach($notes as $note)
+        {
+            //$messages[] = array('text' => '&nbsp;&nbsp;&bull; ' . $note);
+            $messages[] = array('html' => '<li>' . $note . '</li>', 'no_linebreak' => true);
+        }
+        $messages[] = array('html' => "</ul>");
+        $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$id.'">', 'no_linebreak' => true);
+        $messages[] = array('html' => '<input type="submit" class="btn btn-default" name="" value="'.$abort_msg.'">', 'no_linebreak' => true);
+        $messages[] = array('html' => '<input type="submit" class="btn btn-danger" name="delete_confirmed" value="'.$confirm_msg.'">');
+
+        return $messages;
+    }
+
+    /**
      * @brief Find all subdirectories of a directory (not recursive)
      *
      * @param string    $directory          Path to the directory (IMPORTANT: absolute UNIX path, with slash at the end! see to_unix_path())

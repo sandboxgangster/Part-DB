@@ -137,6 +137,7 @@
                     }
                     else
                     {
+                        /*
                         $messages[] = array('text' =>  sprintf(_('Soll der Hersteller "%s'.
                                                         '" wirklich unwiederruflich gelöscht werden?'),$selected_manufacturer->get_full_path()), 'strong' => true, 'color' => 'red');
                         $messages[] = array('text' => _('<br>Hinweise:'), 'strong' => true);
@@ -145,6 +146,17 @@
                         $messages[] = array('html' => '<input type="hidden" name="selected_id" value="'.$selected_manufacturer->get_id().'">');
                         $messages[] = array('html' => '<input type="submit" class="btn btn-default" name="" value="'._('Nein, nicht löschen').'">', 'no_linebreak' => true);
                         $messages[] = array('html' => '<input type="submit" class="btn btn-danger" name="delete_confirmed" value="'._('Ja, Hersteller löschen').'">');
+                         */
+
+                        $notes[] = _("Es gibt keine Bauteile, die diesen Hersteller zugeordnet haben.");
+                        $notes[] = _("Beinhaltet dieser Hersteller noch Unterhersteller, dann werden diese eine Ebene nach oben verschoben.");
+                        $title = sprintf(_('Soll der Hersteller "%s'.
+                            '" wirklich unwiederruflich gelöscht werden?'),$selected_manufacturer->get_full_path());
+
+                        $dialog = generate_delete_dialog($selected_manufacturer->get_id(), $title, $notes, _('Ja, Hersteller löschen'), _('Nein, nicht löschen') );
+
+                        $messages = array_merge($messages, $dialog);
+
                     }
                 }
                 catch (Exception $e)
