@@ -139,7 +139,8 @@
 
     if (( ! $fatal_error) && ( ! $config['startup']['disable_update_list']))
     {
-        $feed_link = 'https://github.com/do9jhb/Part-DB/releases.atom';
+        //$feed_link = 'https://github.com/do9jhb/Part-DB/releases.atom';
+        $feed_link = 'https://github.com/sandboxgangster/Part-DB/releases.atom';
         $item_count = 4;
 
         try
