@@ -85,9 +85,8 @@
         <script src="{$relative_path}js/fileinput.min.js"></script>
 
         <!-- SCEditor (WYSIWYG BBCode Editor) -->
-        <link rel="stylesheet" href="{$relative_path}js/sceditor/themes/default.min.css" />
-        <script src="{$relative_path}js/sceditor/jquery.sceditor.bbcode.min.js"></script>
-
+        {* <link rel="stylesheet" href="{$relative_path}js/sceditor/themes/default.min.css" />
+        <script src="{$relative_path}js/sceditor/jquery.sceditor.bbcode.min.js"></script> *}
 
         <!-- Functions -->
         <script src="{$relative_path}templates/nextgen/js/part-db.js"></script>
