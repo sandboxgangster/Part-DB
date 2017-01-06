@@ -19,6 +19,7 @@ Part-DB ist eine webbasierte Datenbank zum Verwalten von Elektronischen Bauteile
  * HTML5 basierte Weboberfläche, mobile Ansicht
  * BBCode kann zur Textauszeichnung innerhalb der Bauteile verwendet werden.
  * Sprachen: Deutsch und Englisch
+ * Kompatibel mit PHP7
  
 ### Anforderungen
 
