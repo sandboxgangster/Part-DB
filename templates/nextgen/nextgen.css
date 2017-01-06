@@ -1,3 +1,4 @@
+/* The padding is needed, because of the top fixed bar*/
 body {
     overflow-x: hidden;
     position: relative;
@@ -12,29 +13,9 @@ body {
     margin-left: 10px;
 }
 
-.companypic {
-    width: 25px;
-    display: inline;
-}
-
+/* Make the table smaller than normal */
 .td .table-small {
     font-size: 12px;
-}
-
-.hoverpic {
-    min-width: 10px;
-    max-width: 30px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.treeview {
-    font-size: 12px;
-}
-
-.form-group-sm {
-    margin-bottom: 5px;
 }
 
 .table-compact>tbody>tr>td,
@@ -50,13 +31,36 @@ table.dataTable tbody th, table.dataTable tbody td {
     padding: 3px;
 }
 
+/* Make treeview smaller than normal */
+.treeview {
+    font-size: 12px;
+}
+
+.form-group-sm {
+    margin-bottom: 5px;
+}
+
+
 .list-group-item {
     padding: 5px 10px;
 }
 
-
+/* Style images */
 .thumbnail-sm {
     height: 100px;
+}
+
+.hoverpic {
+    min-width: 10px;
+    max-width: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.companypic {
+    width: 25px;
+    display: inline;
 }
 
 .fake-table-col {
@@ -81,6 +85,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 
+/* Fixed sidebar */
 @media  (min-width: 768px) {
     .fixed-sidebar {
         position: fixed;
@@ -94,8 +99,8 @@ table.dataTable tbody th, table.dataTable tbody td {
     }
 }
 
+/* Hide sidebar scrollbar on webkite based browsers like Chrome or Safari */
 .fixed-sidebar::-webkit-scrollbar {display:none;}
-
 
 @media (min-width: 768px) {
     .sidebar-collapse.collapse {
