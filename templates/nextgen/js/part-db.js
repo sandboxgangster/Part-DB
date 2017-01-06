@@ -232,8 +232,8 @@ $(document).ajaxComplete(function (event, xhr, settings) {
 
     //Hide progressbar and show Result
     $('#progressbar').hide(0);
-    //$('#content').show(0);
-    $('#content').fadeIn("fast");
+    $('#content').show(0);
+    //$('#content').fadeIn("fast");
 
 
     makeSortTable();
