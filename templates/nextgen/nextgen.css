@@ -94,6 +94,7 @@ table.dataTable tbody th, table.dataTable tbody td {
         width: inherit;
         overflow-x: hidden;
         overflow-y: auto;
+        /*noinspection W3CssValidation*/
         -webkit-overflow-scrolling: touch;
         max-height: 91%;
     }

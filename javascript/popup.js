@@ -24,8 +24,8 @@
 
     function popUp(URL, modal, dialog_width, dialog_height, no_reload)
     {
-        d  = new Date();
-        id = d.getTime();
+        var d  = new Date();
+        var id = d.getTime();
 
         if (modal)
             eval("page" + id + " = window.showModalDialog(URL,'"+id+"','dialogWidth:"+dialog_width+"px; dialogHeight:"+dialog_height+"px; resizeable:on');");

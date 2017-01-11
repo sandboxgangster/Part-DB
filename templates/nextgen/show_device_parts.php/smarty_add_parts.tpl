@@ -18,7 +18,7 @@
         </form>
     {if isset($no_searched_parts_found) && $no_searched_parts_found}
         <div class="row">
-            <span class="col-md-12" style="color:red">{t}Die Suche ergab keine Treffer!{/t}</span>
+            <span class="col-md-12" style="color:red;">{t}Die Suche ergab keine Treffer!{/t}</span>
         </div>
     {else}
         {if isset($searched_parts_rowcount)}

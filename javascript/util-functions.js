@@ -10,8 +10,7 @@ function addEvent(element, eventType, lamdaFunction, useCapture) {
         element.addEventListener(eventType, lamdaFunction, useCapture);
         return true;
     } else if (element.attachEvent) {
-        var r = element.attachEvent('on' + eventType, lamdaFunction);
-        return r;
+        return  element.attachEvent('on' + eventType, lamdaFunction);
     } else {
         return false;
     }
@@ -99,7 +98,7 @@ function createCookie(name, value, days) {
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
-        var expires = '; expires=' + date.toGMTString();
+        expires = '; expires=' + date.toGMTString();
     }
     document.cookie = name + '=' + value + expires + '; path=/';
 }
